@@ -1,0 +1,19 @@
+[package]
+name = "simd_iter"
+version = "0.1.0"
+authors = ["Chris Jones <chris.jones@cantab.net>"]
+edition = "2018"
+
+[dependencies]
+delegate = "0.6.1"
+num-traits = "0.2"
+
+[dev-dependencies]
+approx = "0.5.0"
+criterion = "0.3"
+proptest = "0.9.5"
+rand = "0.8.4"
+
+[[bench]]
+name = "bench"
+harness = false
