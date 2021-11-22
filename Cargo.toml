@@ -2,7 +2,14 @@
 name = "simd_iter"
 version = "0.1.0"
 authors = ["Chris Jones <chris.jones@cantab.net>"]
+description = "A simple library for iterating over slices as `Simd` vectors."
 edition = "2018"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/chr1sj0nes/simd_iter"
+documentation = "https://docs.rs/simd_iter/"
+readme = "README.md"
+keywords = ["simd"]
+categories = ["no-std", "hardware-support"]
 
 [dependencies]
 delegate = "0.6.1"
