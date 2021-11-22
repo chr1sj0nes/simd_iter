@@ -52,13 +52,13 @@ where
     default fn scalar_sum(self) -> V::Element {
         self.reduce(core::ops::Add::add)
             .map(V::horizontal_sum)
-            .unwrap_or(<V::Element as Zero>::zero())
+            .unwrap_or_else(<V::Element as Zero>::zero)
     }
 
     default fn scalar_product(self) -> V::Element {
         self.reduce(core::ops::Mul::mul)
             .map(V::horizontal_product)
-            .unwrap_or(<V::Element as One>::one())
+            .unwrap_or_else(<V::Element as One>::one)
     }
 
     default fn scalar_min(self) -> Option<V::Element> {
