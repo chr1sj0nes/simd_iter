@@ -149,18 +149,3 @@ impl<T: SimdElement, U: AsRef<[T]>> SimdIterable<T> for U {
         }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use core::simd::Simd;
-
-    use crate::Vector;
-
-    #[test]
-    fn from_slice_padded() {
-        assert_eq!(
-            [0, 1, 2, 99, 99, 99, 99, 99],
-            <Simd::<i32, 8> as Vector>::from_slice_padded(&[0, 1, 2], 99).to_array()
-        );
-    }
-}

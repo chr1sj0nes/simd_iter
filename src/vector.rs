@@ -1,5 +1,4 @@
 use core::simd::{LaneCount, Simd, SimdElement, SupportedLaneCount};
-
 use delegate::delegate;
 use num_traits::{Num, PrimInt};
 
@@ -130,3 +129,17 @@ impl_int_vector!(u16);
 impl_int_vector!(u32);
 impl_int_vector!(u64);
 impl_int_vector!(usize);
+
+#[cfg(test)]
+mod tests {
+    use crate::Vector;
+    use core::simd::Simd;
+
+    #[test]
+    fn from_slice_padded() {
+        assert_eq!(
+            [0, 1, 2, 99, 99, 99, 99, 99],
+            <Simd::<i32, 8> as Vector>::from_slice_padded(&[0, 1, 2], 99).to_array()
+        );
+    }
+}
