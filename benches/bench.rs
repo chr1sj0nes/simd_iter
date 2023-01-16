@@ -1,11 +1,9 @@
 #![feature(portable_simd)]
 
-use std::simd::Simd;
-
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 use rand::Rng;
 
-use simd_iter::{NumVectorReductions, SimdIterable};
+use simd_iter::{SimdIterable, SimdNumIterExt};
 
 fn criterion_benchmark(c: &mut Criterion) {
     let mut xs = vec![0.; 10_000_000];
@@ -23,9 +21,7 @@ fn criterion_benchmark(c: &mut Criterion) {
             xs.simd_iter()
                 .zip(ys.simd_iter())
                 .map(|(xv, yv)| xv * yv)
-                .reduce(std::ops::Add::add)
-                .map(Simd::<f64, 32>::horizontal_sum)
-                .unwrap()
+                .scalar_sum()
         })
     });
 }
