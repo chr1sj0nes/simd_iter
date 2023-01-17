@@ -1,6 +1,6 @@
 #![feature(portable_simd)]
 
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use rand::Rng;
 
 use simd_iter::{SimdIterable, SimdNumIterExt};
