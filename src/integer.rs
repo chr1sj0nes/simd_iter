@@ -4,10 +4,10 @@ use num_traits::PrimInt;
 
 /// A SIMD vector with integer elements (i.e. `SimdInt` or `SimdUint`).
 pub trait SimdInteger:
-core::ops::BitAnd<Output=Self>
-+ core::ops::BitOr<Output=Self>
-+ core::ops::BitXor<Output=Self>
-+ Sized
+    core::ops::BitAnd<Output = Self>
+    + core::ops::BitOr<Output = Self>
+    + core::ops::BitXor<Output = Self>
+    + Sized
 {
     type Scalar: SimdElement + PrimInt;
 
@@ -65,11 +65,11 @@ pub trait SimdIntegerIterExt {
 }
 
 impl<I, T, const LANES: usize> SimdIntegerIterExt for I
-    where
-        I: Iterator<Item=Simd<T, LANES>>,
-        T: SimdElement + PrimInt,
-        LaneCount<LANES>: SupportedLaneCount,
-        Simd<T, LANES>: SimdInteger<Scalar=T>,
+where
+    I: Iterator<Item = Simd<T, LANES>>,
+    T: SimdElement + PrimInt,
+    LaneCount<LANES>: SupportedLaneCount,
+    Simd<T, LANES>: SimdInteger<Scalar = T>,
 {
     type Scalar = T;
 

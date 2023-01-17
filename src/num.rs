@@ -54,11 +54,11 @@ pub trait SimdNumIterExt {
 }
 
 impl<I, T, const LANES: usize> SimdNumIterExt for I
-    where
-        I: Iterator<Item=Simd<T, LANES>>,
-        T: SimdElement + Num,
-        LaneCount<LANES>: SupportedLaneCount,
-        Simd<T, LANES>: SimdNum<Scalar=T>,
+where
+    I: Iterator<Item = Simd<T, LANES>>,
+    T: SimdElement + Num,
+    LaneCount<LANES>: SupportedLaneCount,
+    Simd<T, LANES>: SimdNum<Scalar = T>,
 {
     type Scalar = T;
 

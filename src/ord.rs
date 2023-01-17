@@ -67,10 +67,10 @@ pub trait SimdOrdIterExt {
 }
 
 impl<I, T: SimdElement, const LANES: usize> SimdOrdIterExt for I
-    where
-        I: Iterator<Item=Simd<T, LANES>>,
-        LaneCount<LANES>: SupportedLaneCount,
-        Simd<T, LANES>: SimdOrdOrFloat<Scalar=T>,
+where
+    I: Iterator<Item = Simd<T, LANES>>,
+    LaneCount<LANES>: SupportedLaneCount,
+    Simd<T, LANES>: SimdOrdOrFloat<Scalar = T>,
 {
     type Scalar = T;
 

@@ -22,8 +22,8 @@ pub trait SimdIterable<T: SimdElement> {
     }
 
     fn simd_iter_with_width<const LANES: usize>(&self) -> SimdIter<T, LANES>
-        where
-            LaneCount<LANES>: SupportedLaneCount;
+    where
+        LaneCount<LANES>: SupportedLaneCount;
 }
 
 pub struct SimdIter<'a, T: SimdElement, const LANES: usize>
@@ -68,9 +68,9 @@ where
     /// assert_eq!(15., [1., 2., 3., 4., 5.].simd_iter().scalar_sum());
     /// ```
     pub fn scalar_sum(self) -> T
-        where
-            T: Zero,
-            SimdIterPadded<'a, T, LANES>: SimdNumIterExt<Scalar=T>,
+    where
+        T: Zero,
+        SimdIterPadded<'a, T, LANES>: SimdNumIterExt<Scalar = T>,
     {
         self.padded_with(T::zero()).scalar_sum()
     }
@@ -82,9 +82,9 @@ where
     /// assert_eq!(120., [1., 2., 3., 4., 5.].simd_iter().scalar_product());
     /// ```
     pub fn scalar_product(self) -> T
-        where
-            T: One,
-            SimdIterPadded<'a, T, LANES>: SimdNumIterExt<Scalar=T>,
+    where
+        T: One,
+        SimdIterPadded<'a, T, LANES>: SimdNumIterExt<Scalar = T>,
     {
         self.padded_with(T::one()).scalar_product()
     }
@@ -96,9 +96,9 @@ where
     /// assert_eq!(Some(-7), [-1, 1, -2, 3, -7, 5].simd_iter().scalar_min());
     /// ```
     pub fn scalar_min(self) -> Option<T>
-        where
-            T: MinMaxIdentities,
-            SimdIterPadded<'a, T, LANES>: SimdOrdIterExt<Scalar=T>,
+    where
+        T: MinMaxIdentities,
+        SimdIterPadded<'a, T, LANES>: SimdOrdIterExt<Scalar = T>,
     {
         self.padded_with(T::min_identity()).scalar_min()
     }
@@ -110,9 +110,9 @@ where
     /// assert_eq!(Some(5), [-1, 1, -2, 3, -7, 5].simd_iter().scalar_max());
     /// ```
     pub fn scalar_max(self) -> Option<T>
-        where
-            T: MinMaxIdentities,
-            SimdIterPadded<'a, T, LANES>: SimdOrdIterExt<Scalar=T>,
+    where
+        T: MinMaxIdentities,
+        SimdIterPadded<'a, T, LANES>: SimdOrdIterExt<Scalar = T>,
     {
         self.padded_with(T::max_identity()).scalar_max()
     }
@@ -124,9 +124,9 @@ where
     /// assert_eq!(Some(0b100), [0b111, 0b110, 0b101].simd_iter().scalar_reduce_and());
     /// ```
     pub fn scalar_reduce_and(self) -> Option<T>
-        where
-            T: Zero + core::ops::Not<Output=T>,
-            SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar=T>,
+    where
+        T: Zero + core::ops::Not<Output = T>,
+        SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar = T>,
     {
         self.padded_with(!T::zero()).scalar_reduce_and()
     }
@@ -138,9 +138,9 @@ where
     /// assert_eq!(Some(0b110), [0b000, 0b110, 0b100].simd_iter().scalar_reduce_or());
     /// ```
     pub fn scalar_reduce_or(self) -> Option<T>
-        where
-            T: Zero,
-            SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar=T>,
+    where
+        T: Zero,
+        SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar = T>,
     {
         self.padded_with(T::zero()).scalar_reduce_or()
     }
@@ -152,9 +152,9 @@ where
     /// assert_eq!(Some(0b100), [0b111, 0b110, 0b101].simd_iter().scalar_reduce_xor());
     /// ```
     pub fn scalar_reduce_xor(self) -> Option<T>
-        where
-            T: Zero,
-            SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar=T>,
+    where
+        T: Zero,
+        SimdIterPadded<'a, T, LANES>: SimdIntegerIterExt<Scalar = T>,
     {
         self.padded_with(T::zero()).scalar_reduce_xor()
     }
@@ -198,10 +198,10 @@ impl<T: SimdElement, const LANES: usize> ExactSizeIterator for SimdIter<'_, T, L
 
 // TODO override `advance_by` and `count`.
 impl<T: SimdElement, const LANES: usize> Iterator for SimdIterPadded<'_, T, LANES>
-    where
-        LaneCount<LANES>: SupportedLaneCount,
-        T::Mask: NumCast,
-        Simd<T::Mask, LANES>: SimdPartialOrd<Mask=Mask<T::Mask, LANES>>,
+where
+    LaneCount<LANES>: SupportedLaneCount,
+    T::Mask: NumCast,
+    Simd<T::Mask, LANES>: SimdPartialOrd<Mask = Mask<T::Mask, LANES>>,
 {
     type Item = Simd<T, LANES>;
 
@@ -240,9 +240,9 @@ impl<T: SimdElement, const LANES: usize> Iterator for SimdIterPadded<'_, T, LANE
 }
 
 impl<T: SimdElement, const LANES: usize> ExactSizeIterator for SimdIterPadded<'_, T, LANES>
-    where
-        LaneCount<LANES>: SupportedLaneCount,
-        Self: Iterator,
+where
+    LaneCount<LANES>: SupportedLaneCount,
+    Self: Iterator,
 {
 }
 
